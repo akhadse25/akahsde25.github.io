@@ -263,6 +263,49 @@
       &nbsp;·&nbsp; PS5 &amp; Xbox Series X|S
     </p>
     <p class="note">Unofficial fan countdown · counts to local midnight</p>
+    <!-- ===== Add to Calendar (self-contained block) ===== -->
+<style>
+  .cal{margin-top:clamp(1.3rem,4vw,2rem);display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+  .cal a,.cal button{
+    font-family:"Space Mono",monospace;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink);background:rgba(255,46,136,.08);border:1px solid var(--mag-soft);
+    padding:.7rem 1.1rem;border-radius:8px;cursor:pointer;text-decoration:none;
+    box-shadow:0 0 12px rgba(255,46,136,.22);transition:background .2s,box-shadow .2s;
+  }
+  .cal a:hover,.cal button:hover{background:rgba(255,46,136,.22);box-shadow:0 0 20px rgba(255,46,136,.5)}
+  .launched .cal{display:none}
+</style>
+<div class="cal">
+  <a id="gcal" href="#" target="_blank" rel="noopener">+ Google Calendar</a>
+  <button id="ical" type="button">+ Apple / Outlook (.ics)</button>
+</div>
+<script>
+(function(){
+  var title = "Grand Theft Auto VI \u2014 Launch Day";
+  var details = "GTA VI launches today. Welcome back to Vice City. https://gtageek.me";
+  document.getElementById('gcal').href =
+    "https://calendar.google.com/calendar/render?action=TEMPLATE"
+    + "&text=" + encodeURIComponent(title)
+    + "&dates=20261119/20261120"
+    + "&details=" + encodeURIComponent(details);
+  document.getElementById('ical').addEventListener('click', function(){
+    var ics = [
+      "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//gtageek.me//GTA VI Countdown//EN",
+      "BEGIN:VEVENT","UID:gtavi-launch-20261119@gtageek.me",
+      "DTSTAMP:20260101T000000Z","DTSTART;VALUE=DATE:20261119","DTEND;VALUE=DATE:20261120",
+      "SUMMARY:" + title,"DESCRIPTION:" + details,"URL:https://gtageek.me",
+      "END:VEVENT","END:VCALENDAR"
+    ].join("\r\n");
+    var blob = new Blob([ics], {type:"text/calendar;charset=utf-8"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = "gta6-launch.ics";
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(url);
+  });
+})();
+</script>
+<!-- ===== End Add to Calendar ===== -->
   </main>
 
 <script>
